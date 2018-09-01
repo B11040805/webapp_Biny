@@ -54,11 +54,11 @@ class toutiaoService extends TXService
         }
         $cookie = self::COOKIE;
         $post = array(
-            //'source' => 'mp',
-            //'type' => 'article',
+            'abstract' => '',
+            'authors' => '',
+            'self_appoint' => 0,
             'article_type' => 3,
             'title' => $title,
-            'content' => $content,
             'activity_tag' => 0,
             //'title_id' => '1531069364305_1570713355520002',
             'claim_origin' => 0,
@@ -82,13 +82,26 @@ class toutiaoService extends TXService
             'from_diagnosis' => 0,
             'save' => 1,
         );
+        $imgItems = array();
         foreach ($content as $item) {
             $p = $item['p'];
             $p = str_replace('新浪娱乐讯', '', $p);
             $img = $item['img'];
             // img 转存头条链接
             $touImgInfo = $this->getToutiaoUrl($img);
-            $id = rand(10000, 100000000);
+            $id = rand(10000000000, 1000000000000);
+            $imgItem = array(
+                'url' => $touImgInfo['url'],
+                'uri' => $touImgInfo['web_uri'],
+                'ic_uri' => '',
+                'product' => array(),
+                'desc' => $p,
+                'web_uri' => $touImgInfo['web_uri'],
+                'url_pattern' => '{{image_domain}}',
+                'gallery_id' => $id,
+            );
+            $imgItems[] = $imgItem;
+
             $post['gallery_data'][$id] = array(
                 'url' => $touImgInfo['url'],
                 'ic_uri' => '',
@@ -97,15 +110,20 @@ class toutiaoService extends TXService
                 'url_pattern' => '{{image_domain}}',
                 'gallery_id' => $id,
             );
-            $post['gallery_info'][] = array(
+            /*$post['gallery_info'][] = array(
                 'url' => $touImgInfo['url'],
                 'ic_uri' => '',
                 'desc' => $p,
                 'web_uri' => $touImgInfo['web_uri'],
                 'url_pattern' => '{{image_domain}}',
                 'gallery_id' => $id,
-            );
+            );*/
         }
+        $gallery_content['list'] = $imgItems;
+        $gallery_content = json_encode($gallery_content);
+        $gallery_content = "{!--PGC_GALLERY:".$gallery_content."--}";
+
+        $post['content'] = $gallery_content;
         $header = array(
             'accept-encoding' => 'gzip, deflate, br',
             'accept-language' => 'zh-CN,zh;q=0.9',
