@@ -9,7 +9,7 @@ use TXApp;
  * 演示Action
  * @property \app\dao\userDAO $userDAO
  */
-class toutiaoAction extends baseAction
+class toutiaoGalleryAction extends baseAction
 {
 //    // 权限配置
 //    protected function privilege()
@@ -27,7 +27,7 @@ class toutiaoAction extends baseAction
          $title = $this->post('title');
          $content = $this->post('content');
          $service = new toutiaoService();
-         $res['data'] = $service->create($title, $content);
+         $res['data'] = $service->createGalleryArticle($title, $content);
          $res['errno'] = 0;
          $res['errmsg'] = 'success';
          return json_encode($res);

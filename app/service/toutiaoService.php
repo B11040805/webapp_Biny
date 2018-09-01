@@ -12,7 +12,7 @@ use TXApp;
 class toutiaoService extends TXService
 {
     private $_errors;
-    const COOKIE = 'UM_distinctid=164d72e17e7142-00f20c82fe5222-31657c00-fa000-164d72e17e8bcc; sso_login_status=1; _mp_test_key_1=c1ff5f19b8615ed66f06a9fed4a5f2a0; login_flag=7fbe1b44f17c20bbbf75bc1c5b38691a; sessionid=01397662a9361aab1474c0b8a360474e; sid_tt=01397662a9361aab1474c0b8a360474e; sid_guard="01397662a9361aab1474c0b8a360474e|1532618492|15552000|Tue\054 22-Jan-2019 15:21:32 GMT"; tt_webid=6582546177098597901; __tea_sdk__ssid=ed481e5c-04fb-4b2d-afc5-bda3a4a62b8a; uuid="w:7028c2cc4f23461da666faf1c60f104d"; tt_im_token=1532618493564277095001843773815418530311025774540862037094055458; uid_tt=837a5c281e188228779b31084696d854';
+    const COOKIE = 'UM_distinctid=164d72e17e7142-00f20c82fe5222-31657c00-fa000-164d72e17e8bcc; login_flag=7fbe1b44f17c20bbbf75bc1c5b38691a; sessionid=01397662a9361aab1474c0b8a360474e; sid_tt=01397662a9361aab1474c0b8a360474e; uuid="w:7028c2cc4f23461da666faf1c60f104d"; uid_tt=837a5c281e188228779b31084696d854; _ga=GA1.2.1740240164.1532846775; _ba=BA0.2-20180729-5110e-YhfCcCicINH45P267OKV; __tea_sdk__ssid=779862a8-a744-4105-b2a1-3d8df6fd29da; tt_webid=6586136311144072711; __tea_sdk__user_unique_id=6586136311144072711; tt_im_token=1533520571812138225226211478504341908571766817333853819568270718; tt_track_id=a61c162a65a9712150360d041b809e57; ccid=e7228b24aecd87c4bccbae4efdc07144; sso_uid_tt=ea293af3838f57c6b458f2f3c55f8f5d; toutiao_sso_user=1c834f6edb2cf90a4ce7a0ad798912e1; sso_login_status=1; sid_guard="01397662a9361aab1474c0b8a360474e|1535786965|15552000|Thu\054 28-Feb-2019 07:29:25 GMT"; ptcn_no=9d9f1802707695925d39ada1da299c5a; _gid=GA1.2.1472241175.1535787677; currentMediaId=1570713355520002';
     public function create($title, $content) {
         $tc = "";
         $content = json_decode($content, true);
@@ -88,7 +88,7 @@ class toutiaoService extends TXService
             $img = $item['img'];
             // img 转存头条链接
             $touImgInfo = $this->getToutiaoUrl($img);
-            $id = rand(10000,100000000);
+            $id = rand(10000, 100000000);
             $post['gallery_data'][$id] = array(
                 'url' => $touImgInfo['url'],
                 'ic_uri' => '',
